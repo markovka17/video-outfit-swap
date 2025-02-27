@@ -1,0 +1,45 @@
+[tool.black]
+target-version = ["py312"]
+line-length = 119
+
+[tool.ruff]
+target-version = "py312"
+line-length = 119
+show-fixes = true
+
+[tool.ruff.lint]
+select = [
+    "B",   # flake8-bugbear
+    "C90", # mccabe
+    "F",   # pyflakes
+    "E",   # pycodestyle
+    "I",   # isort
+    "N",   # pep8-naming
+    "RUF", # ruff
+    "S",   # bandit
+    "TCH", # flake8-type-checking
+    "TID", # flake8-tidy-imports
+    "UP",  # pyupgrade
+]
+extend-ignore = [
+    "B008", # do not perform function calls in argument defaults
+    "RUF001", # allow cyrillic symbols in strings
+    "RUF002", # allow cyrillic symbols in doc string
+]
+
+[tool.ruff.lint.extend-per-file-ignores]
+"test_*.py" = [
+    "S101", # allow use of assert in tests
+]
+
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
+inline-quotes = "double"
+multiline-quotes = "double"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.isort]
+force-single-line = false
+lines-between-types = 1
