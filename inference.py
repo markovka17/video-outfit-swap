@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append("IDM-VTON")
 sys.path.append("IDM-VTON/gradio_demo")
 
@@ -83,7 +84,9 @@ class Segformer:
         """
         # Validate and convert input to PIL image
         if isinstance(image, torch.Tensor):
-            assert image.size(2) == 3 and image.dtype == torch.uint8, "Input tensor must be of shape (H, W, 3) and dtype uint8."
+            assert image.size(2) == 3 and image.dtype == torch.uint8, (
+                "Input tensor must be of shape (H, W, 3) and dtype uint8."
+            )
             image = Image.fromarray(image.cpu().numpy())  # Convert tensor to PIL image
         elif isinstance(image, Image.Image):
             pass  # Input is already a PIL image
@@ -92,7 +95,7 @@ class Segformer:
 
         # Preprocess the image
         inputs = self.processor(images=image, return_tensors="pt")
-        inputs['pixel_values'] = inputs['pixel_values'].to(self.device)  # Move input to the specified device
+        inputs["pixel_values"] = inputs["pixel_values"].to(self.device)  # Move input to the specified device
 
         # Perform inference
         outputs = self.model(**inputs)
@@ -114,7 +117,6 @@ class Segformer:
             result = torch.logical_or(result, mask)
 
         return result
-
 
 
 class Inference:
@@ -246,7 +248,6 @@ class Inference:
 
         return masks, masks_gray
 
-
     @staticmethod
     def create_video(pil_frames, filename=None, fps=25, return_tensor=False):
         """
@@ -270,7 +271,9 @@ class Inference:
         torchvision.io.write_video(filename, frames, fps=fps)
 
     @staticmethod
-    def smooth_video_mask(video: torch.Tensor, space_kernal_size: int = 15, time_kernal_size: int = 7, device: str = "cuda"):
+    def smooth_video_mask(
+        video: torch.Tensor, space_kernal_size: int = 15, time_kernal_size: int = 7, device: str = "cuda"
+    ):
         """
         Smooth a video mask using spatial and temporal averaging.
 
