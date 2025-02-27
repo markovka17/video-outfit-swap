@@ -26,6 +26,12 @@ python inference.py
     --output-path output.mp4
 ```
 
+## Example
+
+Source | Generated
+:-: | :-:
+<video src='https://github.com/user-attachments/assets/c61b4b37-7b08-4d4b-9562-0384db05af56' width=384/> | <video src='https://github.com/user-attachments/assets/da5a9bd3-d735-4a5f-af5c-9f6c7c61d3cb' width=384/>
+
 ## Failed ideas
 1. I tried https://github.com/Zheng-Chong/CatVTON and got a base result in terms of artifacts of try-on.
 2. I tried https://github.com/Zheng-Chong/CatV2TON and also got a base result in terms of try-on artifacts, especially temporal consistency and poor resolution (ever after appling super-resolution model)
